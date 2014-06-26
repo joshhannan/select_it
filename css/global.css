@@ -1,0 +1,134 @@
+/**===========================================================================
+	VARIABLES
+===========================================================================**/
+/**===========================================================================
+	STANDARD CLASSES - NOT NEEDED
+===========================================================================**/
+/*===========================================================================================
+	LAYOUT
+===========================================================================================*/
+body {
+  font: 14px/20px "Arial", sans-serif;
+  background: #50608F;
+  color: #FFF2AA; }
+
+.container {
+  max-width: 1000px;
+  margin: 0 auto;
+  width: 100%;
+  min-height: 100px; }
+
+h1 {
+  font: 2em/2em "Arial", sans-serif;
+  text-shadow: 2px 2px 0px #50608F, 4px 4px 0px #061339; }
+
+h2 {
+  font: 1.8em/1.8em "Arial", sans-serif;
+  text-shadow: 2px 2px 0px #50608F, 4px 4px 0px #061339; }
+
+h3 {
+  font: 1.6em/1.6em "Arial", sans-serif; }
+
+h4 {
+  font: 1.4em/1.4em "Arial", sans-serif; }
+
+h5 {
+  font: 1.2em/1.2em "Arial", sans-serif; }
+
+h6 {
+  font: 1em/1em "Arial", sans-serif;
+  font-weight: bold; }
+
+p {
+  font: italic 1em/1.25em "Arial", sans-serif; }
+
+ul li {
+  font: 1em/1.5em "Arial", sans-serif; }
+
+.button {
+  text-align: center;
+  border-radius: 7px;
+  padding: 18px 50px;
+  text-transform: uppercase; }
+
+/*===========================================================================================
+	BLOCKS - GENERAL RULES
+===========================================================================================*/
+.block {
+  width: 100%;
+  padding: 2% 0;
+  float: left; }
+  .block.inline_block {
+    text-align: center; }
+    .block.inline_block .fifth, .block.inline_block .quarter, .block.inline_block .third, .block.inline_block .two_fifths, .block.inline_block .half, .block.inline_block .three_fifths, .block.inline_block .two_thirds, .block.inline_block .three_quarters, .block.inline_block .four_fifths {
+      float: none;
+      display: inline-block; }
+      .block.inline_block .fifth .text, .block.inline_block .quarter .text, .block.inline_block .third .text, .block.inline_block .two_fifths .text, .block.inline_block .half .text, .block.inline_block .three_fifths .text, .block.inline_block .two_thirds .text, .block.inline_block .three_quarters .text, .block.inline_block .four_fifths .text {
+        text-align: left; }
+  .block.left .fifth, .block.left .quarter, .block.left .third, .block.left .two_fifths, .block.left .half, .block.left .three_fifths, .block.left .two_thirds, .block.left .three_quarters, .block.left .four_fifths {
+    float: left; }
+  .block.right .fifth, .block.right .quarter, .block.right .third, .block.right .two_fifths, .block.right .half, .block.right .three_fifths, .block.right .two_thirds, .block.right .three_quarters, .block.right .four_fifths {
+    float: right; }
+  .block .fifth.left, .block .quarter.left, .block .third.left, .block .two_fifths.left, .block .half.left, .block .three_fifths.left, .block .two_thirds.left, .block .three_quarters.left, .block .four_fifths.left {
+    float: left; }
+  .block .fifth.right, .block .quarter.right, .block .third.right, .block .two_fifths.right, .block .half.right, .block .three_fifths.right, .block .two_thirds.right, .block .three_quarters.right, .block .four_fifths.right {
+    float: right; }
+  .block .fifth .text, .block .quarter .text, .block .third .text, .block .two_fifths .text, .block .half .text, .block .three_fifths .text, .block .two_thirds .text, .block .three_quarters .text, .block .four_fifths .text {
+    margin: 0 2%;
+    width: 96%; }
+  .block .fifth .image, .block .quarter .image, .block .third .image, .block .two_fifths .image, .block .half .image, .block .three_fifths .image, .block .two_thirds .image, .block .three_quarters .image, .block .four_fifths .image {
+    margin: 0 2%;
+    width: 96%; }
+    .block .fifth .image img, .block .quarter .image img, .block .third .image img, .block .two_fifths .image img, .block .half .image img, .block .three_fifths .image img, .block .two_thirds .image img, .block .three_quarters .image img, .block .four_fifths .image img {
+      display: block;
+      width: 100%;
+      height: auto; }
+  .block .fifth {
+    width: 20%; }
+  .block .quarter {
+    width: 25%; }
+  .block .third {
+    width: 30%; }
+  .block .two_fifths {
+    width: 40%; }
+  .block .half {
+    width: 50%; }
+  .block .three_fifths {
+    width: 60%; }
+  .block .two_thirds {
+    width: 70%; }
+  .block .three_quarters {
+    width: 75%; }
+  .block .four_fifths {
+    width: 80%; }
+  .block header {
+    width: 90%;
+    margin: 0 5%; }
+
+/**===========================================================================
+	GENERIC SETUP
+===========================================================================**/
+.select_it {
+  width: 80%;
+  margin: 0 10%;
+  float: left; }
+  .select_it .select_it_box {
+    background: #FFFFFF;
+    width: 90%;
+    padding: 5%;
+    color: #666666;
+    cursor: pointer; }
+  .select_it ul {
+    background: #FFFFFF;
+    width: 100%;
+    margin: 0;
+    padding: 0;
+    color: #666666;
+    list-style: none inside none; }
+    .select_it ul li {
+      width: 90%;
+      padding: 0 5%;
+      cursor: pointer; }
+      .select_it ul li:hover {
+        background: #666666;
+        color: #FFFFFF; }

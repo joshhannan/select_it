@@ -8,6 +8,7 @@
 		<meta charset="utf-8">
 		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
 		<title>Select It Plugin</title>
+		<link rel="stylesheet" type="text/css" href="css/global.css">
 		<script src="jquery-1.10.2.min.js"></script>
 		<script src="select_it.min.js"></script>
 		<script>
@@ -17,28 +18,36 @@
 		</script>
 	</head>
 	<body>
-		<header>
+		<header class="block">
 			<div class="container">
 				<h1>Select It Plugin</h1>
 				<p>Extremely simple replacement for a select field.  Style as necessary to achieve desired effect.</p>
 			</div><!--/container-->
-		</header>
-		<section>
+		</header><!--/block-->
+		<section class="block">
 			<div class="container">
-				<select data-placeholder="Placeholder Text">
-					<option value="Option 1">Option 1</option>
-					<option value="Option 2">Option 2</option>
-					<option value="Option 3">Option 3</option>
-					<option value="Option 4">Option 4</option>
-					<option value="Option 5">Option 5</option>
-					<option value="Option 6">Option 6</option>
-					<option value="Option 7">Option 7</option>
-					<option value="Option 8">Option 8</option>
-					<option value="Option 9">Option 9</option>
-					<option value="Option 10">Option 10</option>
-					<option value="Option 11">Option 11</option>
-					<option value="Option 12">Option 12</option>
-				</select>
+				<div class="left block">
+					<div class="quarter">
+						<select data-placeholder="Placeholder Text">
+							<option value="Option 1">Option 1</option>
+							<option value="Option 2">Option 2</option>
+							<option value="Option 3">Option 3</option>
+							<option value="Option 4">Option 4</option>
+							<option value="Option 5">Option 5</option>
+							<option value="Option 6">Option 6</option>
+							<option value="Option 7">Option 7</option>
+							<option value="Option 8">Option 8</option>
+							<option value="Option 9">Option 9</option>
+							<option value="Option 10">Option 10</option>
+							<option value="Option 11">Option 11</option>
+							<option value="Option 12">Option 12</option>
+						</select>
+					</div><!--/quarter-->
+					<div class="three_quarters">
+						<h2>Totally Customizable and works across all browsers.</h2>
+						<p>Select_it simply does that:  Selects a specified select field, hides it, and builds customizable HTML that you can style any way you wish.  It's that simple.  Works with forms as it changes the value of the hidden select field as well so there aren't any issues.</p>
+					</div><!--/three_quarters-->
+				</div><!---/block-->
 			</div><!--/container-->
 		</section>
 		<footer>

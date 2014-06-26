@@ -1,0 +1,117 @@
+/*===========================================================================================
+	LAYOUT
+===========================================================================================*/
+body {
+	font: 14px/20px $arial;
+	background: #50608F;
+	color: #FFF2AA;
+}
+.container {
+	max-width: 1000px;
+	margin: 0 auto;
+	width: 100%;
+	min-height: 100px;
+}
+h1 {
+	font: 2em/2em $arial;
+	text-shadow: 2px 2px 0px #50608F, 4px 4px 0px #061339;
+}
+h2 {
+	font: 1.8em/1.8em $arial;
+	text-shadow: 2px 2px 0px #50608F, 4px 4px 0px #061339;
+}
+h3 {
+	font: 1.6em/1.6em $arial;
+}
+h4 {
+	font: 1.4em/1.4em $arial;
+}
+h5 {
+	font: 1.2em/1.2em $arial;
+}
+h6 {
+	font: 1em/1em $arial;
+	font-weight: bold;
+}
+p {
+	font: italic 1em/1.25em $arial;
+}
+ul {
+	li {
+		font: 1em/1.5em $arial;
+	}
+}
+a {
+	&:hover, &:active {
+	}
+}
+.button {
+	text-align: center;
+	border-radius: 7px;
+	padding: 18px 50px;
+	text-transform: uppercase;
+	&:hover {
+	}
+}
+/*===========================================================================================
+	BLOCKS - GENERAL RULES
+===========================================================================================*/
+.block {
+	width: 100%;
+	padding: 2% 0;
+	float: left;
+	&.inline_block {
+		text-align: center;
+		.fifth, .quarter, .third, .two_fifths, .half, .three_fifths, .two_thirds, .three_quarters, .four_fifths {
+			float: none;
+			display: inline-block;
+			.text {
+				text-align: left;
+			}
+		}
+	}
+	&.left {
+		.fifth, .quarter, .third, .two_fifths, .half, .three_fifths, .two_thirds, .three_quarters, .four_fifths {
+			float: left;
+		}
+	}
+	&.right {
+		.fifth, .quarter, .third, .two_fifths, .half, .three_fifths, .two_thirds, .three_quarters, .four_fifths {
+			float: right;
+		}
+	}
+	.fifth, .quarter, .third, .two_fifths, .half, .three_fifths, .two_thirds, .three_quarters, .four_fifths {
+		&.left {
+			float: left;
+		}
+		&.right {
+			float: right;
+		}
+		.text {
+			margin: 0 2%;
+			width: 96%;
+		}
+		.image {
+			margin: 0 2%;
+			width: 96%;
+			img {
+				display: block;
+				width: 100%;
+				height: auto;
+			}
+		}
+	}
+	.fifth { width: 20%; }
+	.quarter { width: 25%; }
+	.third { width: 30%; }
+	.two_fifths { width: 40%; }
+	.half { width: 50%; }
+	.three_fifths { width: 60%; }
+	.two_thirds { width: 70%;}
+	.three_quarters { width: 75%; }
+	.four_fifths { width: 80%; }
+	header {
+		width: 90%;
+		margin: 0 5%;
+	}
+}

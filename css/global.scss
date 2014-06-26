@@ -1,0 +1,50 @@
+/**===========================================================================
+	VARIABLES
+===========================================================================**/
+$arial: "Arial", sans-serif;
+
+/**===========================================================================
+	STANDARD CLASSES - NOT NEEDED
+===========================================================================**/
+
+@import "standard";
+
+/**===========================================================================
+	GENERIC SETUP
+===========================================================================**/
+
+.select_it {
+	width: 80%;
+	margin: 0 10%;
+	float: left;
+	.select_it_box {
+		background: #FFFFFF;
+		width: 90%;
+		padding: 5%;
+		color: #666666;
+		cursor: pointer;
+		.displayed {
+
+		}
+		.tab {
+
+		}
+	}
+	ul {
+		background: #FFFFFF;
+		width: 100%;
+		margin: 0;
+		padding: 0;
+		color: #666666;
+		list-style: none inside none;
+		li {
+			width: 90%;
+			padding: 0 5%;
+			cursor: pointer;
+			&:hover {
+				background: #666666;
+				color: #FFFFFF;
+			}
+		}
+	}
+}
