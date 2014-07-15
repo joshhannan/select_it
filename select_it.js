@@ -31,7 +31,8 @@
 				current = $(this).parents('.select_it').attr('id');
 				$('#'+current+' ul li').removeClass('selected');
 				$('#'+current+' ul').hide();
-				selected = $(this).html();
+				selected = $(this).attr('value');
+				selected_text = $(this).html();
 				$(this).addClass('selected');
 				$(this).parents('.select_it').prev('select').find('option').each(function() {
 					select_check = $(this).val();
@@ -40,7 +41,7 @@
 						$(this).attr('selected', 'selected');
 					}
 				});
-				$('#'+current+' .select_it_box .displayed').html(selected);
+				$('#'+current+' .select_it_box .displayed').html(selected_text);
 			});
 		});
 		$(document).click(function() {
