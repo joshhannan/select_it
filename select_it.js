@@ -1,20 +1,22 @@
-// Plugins
-
 (function($) {
 	$.fn.select_it = function( options ) {
 		var choices_array = [];
 		var count = 0;
-		var placeholder;
-		var selected;
-		var select_check;
-		var current;
+		var placeholder, selected, select_check, current, onchange;
+		var settings = $.extend({
+			onchange: 'none'
+		}, options );
 		$(this).each(function() {
 			choices_array = [];
 			count++;
 			$(this).hide();
 			var choices = $(this).html();
 			if( $(this).data('placeholder') ) { placeholder = $(this).data('placeholder'); } else { placeholder = '...'; }
+			if( $(this).data('onchange') ) { onchange = $(this).data('onchange'); } else { onchange = settings.onchange; }
 			$(this).children('option').each(function(index) {
+				if( $(this).attr('selected') ) {
+					placeholder = $(this).html();
+				}
 				var choice_value = $(this).val();
 				var choice_text = $(this).text();
 				choices_array[index] = ['<li value="'+choice_value+'">'+choice_text+'</li>'];
@@ -42,6 +44,9 @@
 					}
 				});
 				$('#'+current+' .select_it_box .displayed').html(selected_text);
+				if( onchange == 'submit' ) {
+					$(this).parents('form').submit();
+				}
 			});
 		});
 		$(document).click(function() {
