@@ -50,15 +50,12 @@
 						$(this).attr('selected', 'selected');
 					}
 				});
-<<<<<<< HEAD
 				$('#'+current).children('.select_it_box').removeClass('open');
 				$('#'+current+' .select_it_box .displayed').html(selected);
-=======
 				$('#'+current+' .select_it_box .displayed').html(selected_text);
 				if( onchange == 'submit' ) {
 					$(this).parents('form').submit();
 				}
->>>>>>> FETCH_HEAD
 			});
 		});
 		$(document).click(function() {
