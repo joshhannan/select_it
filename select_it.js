@@ -43,13 +43,14 @@
 				$(this).addClass('selected');
 				$(this).parents('.select_it').prev('select').find('option').each(function() {
 					select_check = $(this).val();
-					//console.log('Select Check is:  '+select_check);
 					if( select_check == selected ) {
 						console.log(select_check);
 						$('select').find('option').removeAttr('selected');
 						$(this).attr('selected', 'selected');
 					}
 				});
+				$('#'+current).children('.select_it_box').removeClass('open');
+				$('#'+current+' .select_it_box .displayed').html(selected);
 				$('#'+current+' .select_it_box .displayed').html(selected_text);
 				if( onchange == 'submit' ) {
 					$(this).parents('form').submit();
@@ -57,6 +58,7 @@
 			});
 		});
 		$(document).click(function() {
+			$('.select_it .select_it_box').removeClass('open');
 			$('.select_it ul').hide();
 		});
 		return this;
