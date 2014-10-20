@@ -5,6 +5,7 @@
 		var placeholder, selected, select_check, current, onchange;
 		var settings = $.extend({
 			onchange: 'none',
+			returned_div: 'toggled',
 			placeholder: '...'
 		}, options );
 		$(this).each(function() {
@@ -24,7 +25,6 @@
 			$('.select_it .select_it_box').click(function(e) {
 				e.stopImmediatePropagation();
 				current = $(this).parents('.select_it').attr('id');
-				console.log(current);
 				if( $('#'+current+' .select_it_box').hasClass('open') ) {
 					$('.select_it_box').removeClass('open');
 					$('.select_it ul').hide();
@@ -45,7 +45,6 @@
 				$(this).addClass('selected');
 				$(this).parents('#'+current).prev('select').find('option').each(function() {
 					select_check = $(this).val();
-					console.log(select_check);
 					if( select_check == selected ) {
 						$(this).parents('select').find('option').removeAttr('selected');
 						$(this).attr('selected', 'selected');
@@ -54,6 +53,11 @@
 				$('#'+current).children('.select_it_box').removeClass('open');
 				$('#'+current+' .select_it_box .displayed').html(selected);
 				$('#'+current+' .select_it_box .displayed').html(selected_text);
+				if( onchange == 'toggle' ) {
+					var toggled = $(this).attr('rel');
+					$('.'+settings.returned_div).hide();
+					$('#'+settings.returned_div+'_'+toggled).show(200);
+				}
 				if( onchange == 'submit' ) {
 					$(this).parents('form').submit();
 				}
