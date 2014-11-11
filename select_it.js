@@ -13,7 +13,11 @@
 			count++;
 			$(this).hide();
 			var choices = $(this).html();
-			if( $(this).data('placeholder') ) { placeholder = $(this).data('placeholder'); } else { placeholder = settings.placeholder; }
+			if( $(this).data('placeholder') ) {
+				if( $(this).find('option:selected') ) { placeholder = $(this).find('option:selected').text(); } else { placeholder = $(this).data('placeholder'); }
+			} else {
+				if( $(this).find('option:selected') ) { placeholder = $(this).find('option:selected').text(); } else { placeholder = settings.placeholder; }
+			}
 			if( $(this).data('onchange') ) { onchange = $(this).data('onchange'); } else { onchange = settings.onchange; }
 			$(this).children('option').each(function(index) {
 				var choice_value = $(this).val();
