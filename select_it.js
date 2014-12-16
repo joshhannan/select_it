@@ -27,6 +27,7 @@
 			choices_array = choices_array.join('\r');
 			$(this).after('<div id="select_'+count+'" class="select_it"><div class="select_it_box"><span class="displayed">'+placeholder+'</span><span class="tab"></span></div><ul style="display: none;">'+choices_array+'</ul></div><!--/select_it-->');
 			$('.select_it .select_it_box').click(function(e) {
+				e.stopImmediatePropagation();
 				current = $(this).parents('.select_it').attr('id');
 				if( $('#'+current+' .select_it_box').hasClass('open') ) {
 					$('.select_it_box').removeClass('open');
@@ -37,9 +38,9 @@
 					$('#'+current+' .select_it_box').addClass('open');
 					$('#'+current+' ul').show();
 				}
-				e.stopPropagation();
 			});
 			$('.select_it ul li').click(function(e) {
+				e.stopImmediatePropagation();
 				current = $(this).parents('.select_it').attr('id');
 				$('#'+current+' ul li').removeClass('selected');
 				$('#'+current+' ul').hide();
@@ -64,7 +65,6 @@
 				if( onchange == 'submit' ) {
 					$(this).parents('form').submit();
 				}
-				e.stopPropagation();
 			});
 		});
 		$(document).click(function() {
