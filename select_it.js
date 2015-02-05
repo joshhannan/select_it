@@ -11,13 +11,11 @@
 		$(this).each(function() {
 			choices_array = [];
 			count++;
+			var option_count = 0;
 			$(this).hide();
 			var choices = $(this).html();
-			if( $(this).data('placeholder') ) {
-				if( $(this).find('option:selected') ) { placeholder = $(this).find('option:selected').text(); } else { placeholder = $(this).data('placeholder'); }
-			} else {
-				if( $(this).find('option:selected') ) { placeholder = $(this).find('option:selected').text(); } else { placeholder = settings.placeholder; }
-			}
+			if( $(this).data('placeholder') ) { placeholder = $(this).data('placeholder'); } else { placeholder = settings.placeholder; }
+			$(this).find('option').each(function() { option_count++; if( option_count != 1 && $(this).is(':selected') ) { placeholder = $(this).text(); } });
 			if( $(this).data('onchange') ) { onchange = $(this).data('onchange'); } else { onchange = settings.onchange; }
 			$(this).children('option').each(function(index) {
 				var choice_value = $(this).val();
@@ -60,7 +58,7 @@
 				if( onchange == 'toggle' ) {
 					var toggled = $(this).attr('rel');
 					$('.'+settings.returned_div).hide();
-					$('#'+settings.returned_div+'_'+toggled).show(200);
+					$('#'+toggled).show(200);
 				}
 				if( onchange == 'submit' ) {
 					$(this).parents('form').submit();
