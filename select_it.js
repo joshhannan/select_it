@@ -2,15 +2,17 @@
 	$.fn.select_it = function( options ) {
 		var choices_array = [];
 		var count = 0;
-		var placeholder, selected, select_check, current, onchange;
-		var settings = $.extend({
-			onchange: 'none',
-			returned_div: 'toggled',
-			placeholder: '...'
-		}, options );
 		$(this).each(function() {
 			choices_array = [];
 			count++;
+			var placeholder, selected, select_check, current, onchange;
+			var settings = $.extend({
+				onchange: 'none',
+				onchange_url:  'gallery_ajax.php',
+				onchange_container: '.gallery .carousel.block',
+				returned_div: 'toggled',
+				placeholder: '...'
+			}, options );
 			var option_count = 0;
 			$(this).hide();
 			var choices = $(this).html();
@@ -60,8 +62,27 @@
 					$('.'+settings.returned_div).hide();
 					$('#'+toggled).show(200);
 				}
+				if( onchange == 'load' ) {
+					$(settings.onchange_container).html('<img class="loading" src="http://localhost/~webdesigner/cfa_site/wp-content/themes/cfa_theme/images/loading.gif" />');
+					var value = $(this).attr('rel');
+					console.log(value);
+					$.ajax({
+						url: settings.onchange_url+'?id='+value,
+						error: function(data) { console.log('fail'); },
+						success: function(data) {
+							$(settings.onchange_container).html(data);
+							$(settings.onchange_container).data('owlCarousel').reinit({
+								itemsCustom: [[0, 3], [400, 4]]
+							});
+						}
+					});
+				}
+				console.log('testing');
+				console.log(onchange);
 				if( onchange == 'submit' ) {
-					$(this).parents('form').submit();
+					var form_submit = $(this).closest('form');
+					console.log(form_submit);
+					$(this).closest('form').submit();
 				}
 			});
 		});
