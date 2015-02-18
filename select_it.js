@@ -6,7 +6,6 @@
 		$(this).each(function() {
 			if( $(this).parent('form') ) {
 				var element_count = $(this).parent('form').children().length;
-				console.log(element_count);
 				element_count = '';
 			}
 			choices_array = [];
@@ -118,7 +117,6 @@
 				if( onchange == 'load' ) {
 					$(settings.onchange_container).html('<img class="loading" src="images/loading.gif" />');
 					var value = $(this).attr('rel');
-					console.log(value);
 					$.ajax({
 						url: settings.onchange_url+'?id='+value,
 						error: function(data) { console.log('fail'); },
@@ -130,11 +128,8 @@
 						}
 					});
 				}
-				console.log('testing');
-				console.log(onchange);
 				if( onchange == 'submit' ) {
 					var form_submit = $(this).closest('form');
-					console.log(form_submit);
 					$(this).closest('form').submit();
 				}
 			});
