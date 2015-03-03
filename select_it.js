@@ -23,7 +23,11 @@
 			$(this).hide();
 			var choices = $(this).html();
 			if( $(this).attr('tabindex') ) { tabindex = $(this).attr('tabindex'); } else { tabindex = settings.tabindex; }
-			if( $(this).data('placeholder') ) { placeholder = $(this).data('placeholder'); } else { placeholder = settings.placeholder; }
+			if( $(this).data('placeholder') ) {
+				if( $(this).find('option:selected') ) { placeholder = $(this).find('option:selected').text(); } else { placeholder = $(this).data('placeholder'); }
+			} else {
+				if( $(this).find('option:selected') ) { placeholder = $(this).find('option:selected').text(); } else { placeholder = settings.placeholder; }
+			}
 			$(this).find('option').each(function() { option_count++; if( option_count != 1 && $(this).is(':selected') ) { placeholder = $(this).text(); } });
 			if( $(this).data('onchange') ) { onchange = $(this).data('onchange'); } else { onchange = settings.onchange; }
 			$(this).children('option').each(function(index) {
@@ -115,7 +119,7 @@
 					$('#'+toggled).show(200);
 				}
 				if( onchange == 'load' ) {
-					$(settings.onchange_container).html('<img class="loading" src="images/loading.gif" />');
+					$(settings.onchange_container).html('<img class="loading" src="http://localhost/~webdesigner/cfa_site/wp-content/themes/cfa_theme/images/loading.gif" />');
 					var value = $(this).attr('rel');
 					$.ajax({
 						url: settings.onchange_url+'?id='+value,
