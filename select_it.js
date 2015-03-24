@@ -2,18 +2,13 @@
 	$.fn.select_it = function( options ) {
 		var choices_array = [];
 		var count = 0;
-		var key_check;
 		$(this).each(function() {
-			if( $(this).parent('form') ) {
-				var element_count = $(this).parent('form').children().length;
-				element_count = '';
-			}
 			choices_array = [];
 			count++;
 			var placeholder, selected, select_check, current, onchange, tabindex;
 			var settings = $.extend({
 				onchange: 'none',
-				onchange_url:  'gallery_ajax.php',
+				onchange_url:  'gallery-ajax.php',
 				onchange_container: '.gallery .carousel.block',
 				returned_div: 'toggled',
 				placeholder: '...',
@@ -23,11 +18,7 @@
 			$(this).hide();
 			var choices = $(this).html();
 			if( $(this).attr('tabindex') ) { tabindex = $(this).attr('tabindex'); } else { tabindex = settings.tabindex; }
-			if( $(this).data('placeholder') ) {
-				if( $(this).find('option:selected') ) { placeholder = $(this).find('option:selected').text(); } else { placeholder = $(this).data('placeholder'); }
-			} else {
-				if( $(this).find('option:selected') ) { placeholder = $(this).find('option:selected').text(); } else { placeholder = settings.placeholder; }
-			}
+			if( $(this).data('placeholder') ) { placeholder = $(this).data('placeholder'); } else { placeholder = settings.placeholder; }
 			$(this).find('option').each(function() { option_count++; if( option_count != 1 && $(this).is(':selected') ) { placeholder = $(this).text(); } });
 			if( $(this).data('onchange') ) { onchange = $(this).data('onchange'); } else { onchange = settings.onchange; }
 			$(this).children('option').each(function(index) {
@@ -91,7 +82,8 @@
 					$('#'+current+' .select_it_box .displayed').html(selected);
 				}
 				if( e.keyCode == 9 ) {
-					$('#'+current).parents('form > .fieldset .block').next().find('input, textarea').focus();
+					$('#'+current).parents('.third').next().find('input, textarea').focus();
+					/*$('#'+current).parents('form > .third').next('.block').find('input, textarea').focus();*/
 				}
 				return false;
 			});
@@ -119,24 +111,44 @@
 					$('#'+toggled).show(200);
 				}
 				if( onchange == 'load' ) {
-					$(settings.onchange_container).html('<img class="loading" src="http://localhost/~webdesigner/cfa_site/wp-content/themes/cfa_theme/images/loading.gif" />');
+					$(settings.onchange_container).html('<img class="loading" src="http://centerforautism.aycdemo.com/wp-content/themes/cfa_theme/images/loading.gif" />');
 					var value = $(this).attr('rel');
 					$.ajax({
-						url: settings.onchange_url+'?id='+value,
+						type: 'POST',
+						url:  ajax_call.ajaxurl,
+						data: { action: 'gallery_loader', id: value },
 						error: function(data) { console.log('fail'); },
 						success: function(data) {
+							console.log('is ' . data);
 							$(settings.onchange_container).html(data);
-							$(settings.onchange_container).data('owlCarousel').reinit({
-								itemsCustom: [[0, 3], [400, 4]]
-							});
+							if( $('.gallery' ).hasClass('photos_videos') ) {
+								$(settings.onchange_container).data('owlCarousel').reinit({
+									itemsCustom: [[0, 1], [400, 2]]
+								});
+							} else {
+								$(settings.onchange_container).data('owlCarousel').reinit({
+									itemsCustom: [[0, 1], [480, 2], [850, 3], [1000, 4]]
+								});
+							}
 						}
 					});
 				}
+				if( onchange == 'change_url' ) {
+					$('.gallery .videos .video_container .video iframe').hide();
+					var new_url = $(this).attr('rel');
+					$('.gallery .videos .video_container .video iframe').after('<img class="loading" src="http://localhost/~webdesigner/cfa_site/wp-content/themes/cfa_theme/images/loading.gif" />');
+					$('.gallery .videos .video_container .video iframe').attr('src', new_url).fadeIn(200);
+					$('.video .loading').remove();
+				}
 				if( onchange == 'submit' ) {
-					var form_submit = $(this).closest('form');
-					$(this).closest('form').submit();
+					$(this).parents('form').submit();
 				}
 			});
+		});
+		var i_count = 0;
+		$('.select_it').each(function(){
+			i_count++;
+			$(this).attr('id', 'select_'+i_count);
 		});
 		$(document).click(function() {
 			$('.select_it .select_it_box').removeClass('open');

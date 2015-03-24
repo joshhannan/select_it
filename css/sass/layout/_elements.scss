@@ -1,0 +1,165 @@
+/*===========================================================================================
+	LAYOUT
+===========================================================================================*/
+* { @include box-sizing($box-model: border-box); -webkit-font-smoothing: antialiased; }
+body {
+	font: 14px/20px $arial;
+	background: #50608F;
+	color: #FFF2AA;
+}
+.container {
+	max-width: 1000px;
+	margin: 0 auto;
+	width: 100%;
+	min-height: 100px;
+}
+h1 {
+	font: 2em/2em $arial;
+	text-shadow: 2px 2px 0px #50608F, 4px 4px 0px #061339;
+}
+h2 {
+	font: 1.8em/1.8em $arial;
+	text-shadow: 2px 2px 0px #50608F, 4px 4px 0px #061339;
+}
+h3 {
+	font: 1.6em/1.6em $arial;
+}
+h4 {
+	font: 1.4em/1.4em $arial;
+}
+h5 {
+	font: 1.2em/1.2em $arial;
+}
+h6 {
+	font: 1em/1em $arial;
+	font-weight: bold;
+}
+p {
+	font: italic 1em/1.25em $arial;
+}
+ul {
+	li {
+		font: 1em/1.5em $arial;
+	}
+}
+a {
+	&:hover, &:active {
+	}
+}
+.button {
+	text-align: center;
+	border-radius: 7px;
+	padding: 18px 50px;
+	text-transform: uppercase;
+	&:hover {
+	}
+}
+.select_it {
+	width: 100%; float: left; position: relative;
+	.select_it_box {
+		width: 100%; float: left;
+		.displayed { cursor: pointer; text-align: left; display: block; background: $white; padding: 14px 15px; border-radius: 8px; width: 100%; color: $black; font: 18px/18px $text; text-transform: uppercase; }
+		&.open .displayed { border-bottom-left-radius: 0px; border-bottom-right-radius: 0px; }
+		&.open .tab:after { content: "\f106";  }
+	}
+	.tab {
+		position: absolute; width: 24px; top: 16px; right: 5px; bottom: 10px; color: $black;
+		&:after { content: "\f107"; font: 32px/16px 'FontAwesome'; }
+	}
+	ul { background: $white; width: 100%; position: absolute; top: 99%; z-index: 9999; float: left; padding: 10px 0; max-height: 150px; border-left: 1px solid $gray; border-right: 1px solid $gray; border-bottom: 1px solid $gray; box-sizing: border-box; overflow-y: scroll; }
+	li {
+		cursor: pointer; width: 100%; box-sizing: border-box; padding: 5px 7%; float: left; list-style: none outside; display: block; font: 12px/12px $text; color: $white;
+		&:hover, &.selected { color: $white; background: $light_black; }
+	}
+}
+/*===========================================================================================
+	CONTACT FORM
+===========================================================================================*/
+.contact_form, .wpcf7 {
+	width: 100%;
+	float: left;
+	.container { max-width: 650px !important; }
+	label {
+		background: $white;
+		color: $white;
+		font: 12px/12px $arial;
+		right: 0;
+		bottom: 0;
+		padding: 5px 20px;
+		position: absolute;
+		text-transform: uppercase;
+		z-index: 9999;
+		@include opacity(0);
+		@include vendorize(transition, all .15s ease-in);
+		&.show { @include opacity(1); }
+	}
+	.block {
+		position: relative;
+		margin: 0 0 15px;
+		input[type=text], input[type=email], input[type=number], input[type=tel], select, textarea {
+			width: 100%;
+			resize: none;
+			border: 0;
+			background: #f6f9f8;
+			padding: 10px 30px;
+			vertical-align: middle;
+			margin: 0;
+			font: normal 11px/20px $text;
+			box-shadow: 0px 0px 5px $shadow;
+			&:focus { outline: none; box-shadow: 0px 0px 5px $light_black; }
+		}
+		textarea { resize: none; }
+		&.omit label { position: relative; top: auto; left: auto; height: auto; }
+	}
+	.thirds { width: 100%; float: left; }
+	.thirds .block { width: 31%; margin: 0 1%; }
+}
+div.wpcf7-validation-errors { border: 2px solid #f7e700; width: 50%; float: left; margin: 0 25%; text-align: center; padding: 10px 0; min-width: 320px; }
+span.wpcf7-not-valid-tip { color: #f00; font-size: 1em; display: block; width: 100%; float: left; position: absolute; right: 0; text-align: right; padding: 5px 0 0; }
+div.wpcf7-mail-sent-ok { border: 2px solid #398f14; width: 50%; float: left; margin: 0 25%; text-align: center; padding: 10px 0; min-width: 320px; }
+/*===========================================================================================
+	BLOCKS - GENERAL RULES
+===========================================================================================*/
+section { padding: 25px 0; @include bp(640) { padding: 2% 0; } }
+section.block .container { @include bp(max-1200) { padding: 0 1.5%; } }
+.block {
+	width: 100%;
+	float: left;
+	&.inline_block {
+		text-align: center;
+		.sixth, .fifth, .quarter, .two_sixths, .third, .two_fifths, .three_sixths, .half, .three_fifths, .four_sixths, .two_third, .three_quarters, .four_fifths, .five_sixths {
+			float: none;
+			@include inline-block;
+			.text { text-align: left; }
+		}
+	}
+	&.left {
+		.sixth, .fifth, .quarter, .two_sixths, .third, .two_fifths, .three_sixths, .half, .three_fifths, .four_sixths, .two_third, .three_quarters, .four_fifths, .five_sixths { float: left; }
+	}
+	&.right {
+		.sixth, .fifth, .quarter, .two_sixths, .third, .two_fifths, .three_sixths, .half, .three_fifths, .four_sixths, .two_third, .three_quarters, .four_fifths, .five_sixths { float: right; }
+	}
+	&.row {
+		.sixth, .fifth, .quarter, .two_sixths, .third, .two_fifths, .three_sixths, .half, .three_fifths, .four_sixths, .two_third, .three_quarters, .four_fifths, .five_sixths {
+			&:first-child { margin: 0; }
+		}	
+	}
+	.sixth, .fifth, .quarter, .two_sixths, .third, .two_fifths, .three_sixths, .half, .three_fifths, .four_sixths, .two_third, .three_quarters, .four_fifths, .five_sixths {
+		&.left { float: left; }
+		&.right { float: right; }
+	}
+	.sixth { width: 100%; @include bp(640) { width: 16%; } }
+	.fifth { width: 100%; @include bp(640) { width: 20%; } }
+	.quarter { width: 100%; @include bp(640) { width: 25%; } }
+	.two_sixths { width: 100%; @include bp(640) { width: 32%; } }
+	.third { width: 100%; @include bp(640) { width: 33%; } }
+	.two_fifths { width: 100%; @include bp(640) { width: 40%; } }
+	.three_sixths { width: 100%; @include bp(640) { width: 48%; } }
+	.half { width: 100%; @include bp(640) { width: 50%; } }
+	.three_fifths { width: 100%; @include bp(640) { width: 60%; } }
+	.four_sixths { width: 100%; @include bp(640) { width: 64%; } }
+	.two_thirds { width: 100%; @include bp(640) { width: 67%;} }
+	.three_quarters { width: 100%; @include bp(640) { width: 75%; } }
+	.four_fifths { width: 100%; @include bp(640) { width: 80%; } }
+	.five_sixths { width: 100%; @include bp(640) { width: 80%; } }
+}

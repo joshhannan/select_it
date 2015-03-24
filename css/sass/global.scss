@@ -24,48 +24,14 @@ $arial: "Arial", sans-serif;
 .orange-3 { color: #804815 }
 .orange-4 { color: #552900 }
 
+.contact_form .block .half {
+	&.left { padding: 0 2% 0 0; }
+	&.right { padding: 0 0 0 2%; }
+}
+
 /**===========================================================================
 	STANDARD CLASSES - NOT NEEDED
 ===========================================================================**/
-
-@import "standard";
-
-/**===========================================================================
-	GENERIC SETUP
-===========================================================================**/
-
-.select_it {
-	width: 80%;
-	margin: 0 10%;
-	float: left;
-	.select_it_box {
-		background: #FFFFFF;
-		width: 90%;
-		padding: 5%;
-		color: #666666;
-		cursor: pointer;
-		.displayed {
-
-		}
-		.tab {
-
-		}
-	}
-	ul {
-		background: #FFFFFF;
-		width: 100%;
-		margin: 0;
-		padding: 0;
-		color: #666666;
-		list-style: none inside none;
-		li {
-			width: 90%;
-			padding: 0 5%;
-			cursor: pointer;
-			&:hover {
-				background: #666666;
-				color: #FFFFFF;
-			}
-		}
-	}
-}
+@import "includes/_mixins.scss";
+@import "includes/_var.scss";
+@import "layout/_elements.scss";
