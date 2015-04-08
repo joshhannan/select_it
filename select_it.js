@@ -119,7 +119,6 @@
 						data: { action: 'gallery_loader', id: value },
 						error: function(data) { console.log('fail'); },
 						success: function(data) {
-							console.log('is ' . data);
 							$(settings.onchange_container).html(data);
 							if( $('.gallery' ).hasClass('photos_videos') ) {
 								$(settings.onchange_container).data('owlCarousel').reinit({
