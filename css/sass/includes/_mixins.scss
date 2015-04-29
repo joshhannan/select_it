@@ -39,6 +39,10 @@
 	@else if $point == max-1400 { @media #{$bp-max-1400}  { @content; } }
 	@else if $point == 768-1000 { @media #{$bp-768-1000} { @content; } }
 }
+@mixin new_bp($bp, $min-max: min-width) {
+	@media(#{$min-max}: #{$bp}) { @content; }
+}
+
 @mixin font( $font_size, $line_height, $base, $bold: $base, $italic: $base, $bolditalic: $base, $fallback: $text ) {
 	font: normal #{$font_size}/#{$line_height} $base, $fallback;
 	strong { font: normal #{$font_size}/#{$line_height} $bold, $fallback; }

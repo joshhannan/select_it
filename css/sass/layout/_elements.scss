@@ -2,76 +2,134 @@
 	LAYOUT
 ===========================================================================================*/
 * { @include box-sizing($box-model: border-box); -webkit-font-smoothing: antialiased; }
-body {
-	font: 14px/20px $arial;
-	background: #50608F;
-	color: #FFF2AA;
-}
-.container {
-	max-width: 1000px;
-	margin: 0 auto;
-	width: 100%;
-	min-height: 100px;
-}
-h1 {
-	font: 2em/2em $arial;
-	text-shadow: 2px 2px 0px #50608F, 4px 4px 0px #061339;
-}
-h2 {
-	font: 1.8em/1.8em $arial;
-	text-shadow: 2px 2px 0px #50608F, 4px 4px 0px #061339;
-}
-h3 {
-	font: 1.6em/1.6em $arial;
-}
-h4 {
-	font: 1.4em/1.4em $arial;
-}
-h5 {
-	font: 1.2em/1.2em $arial;
-}
-h6 {
-	font: 1em/1em $arial;
-	font-weight: bold;
-}
-p {
-	font: italic 1em/1.25em $arial;
-}
-ul {
-	li {
-		font: 1em/1.5em $arial;
+body { font-size: 16px; line-height: 1em; font-family: $text; color: $white; background: $green; }
+.chromeframe { text-align: center; padding: 10px 0; }
+.container { max-width: 1200px; margin: 0 auto; width: 100%; }
+.content {
+	h1 { @include font( 2em, 1.2em, $os, $osb, $osi, $osib ); margin: 0 0 1em; }
+	h2 { @include font( 1.8em, 1em, $os, $osb, $osi, $osib ); margin: 0 0 1em; }
+	h3 { @include font( 1.6em, 1em, $os, $osb, $osi, $osib ); margin: 0 0 1em; }
+	h4 { @include font( 1.4em, 1em, $os, $osb, $osi, $osib ); margin: 0 0 1em;}
+	h5 { @include font( 1.2em, 1em, $os, $osb, $osi, $osib ); margin: 0 0 1em; }
+	h6 { @include font( 1em, 1em, $os, $osb, $osi, $osib ); margin: 0 0 1em; }
+	hr { height: 1px; border: none; background: #c2c2c2; max-width: 300px; margin: 0 auto; box-shadow: 0px 0px 1px #ededed; }
+	hr.space { margin: 20px 0 30px; }
+	hr.center_space { margin: 20px auto 30px; }
+/*
+	hr {
+		position: relative;
+		max-width: 210px;
+		border: none;
+		color: #c5bec7;
+		height: 1px;
+		background: #c5bec7;
+		width: 30%;
+		margin: 40px 35% 20px;
+		&:after {
+			content: '';
+			height: 20px;
+			position: absolute;
+			top: -9px;
+			background-color: #e0e0e0;
+			width: 40px;
+			left: 50%;
+			margin: 0 0 0 -20px;
+			background: #e0e0e0;
+		}
 	}
+*/
+	p { @include font( 1em, 1.25em, $os, $osb, $osi, $osib ); margin: 0 0 1em; }
+	ul { list-style: disc outside none; margin: 0 0 0 15px; }
+	ul li { @include font( 1em, 1.25em, $os, $osb, $osi, $osib ); margin: 0 0 1em; }
+	ul li ul  { margin: 0 0 0 25px; }
+	a { color: $black; &:hover, &:active { color: $body_text; } }
+	.button, a.button { color: $white; margin: 0 0 1em; }
+	.button, a.button { &.right { @include bp(max-640) { float: none; display: block; margin: 0 auto; } } }
+	&.left { padding: 1em 2%; @include bp(640) { padding: 1% 5% 1% 0; } }
+	&.right { padding: 1em 2%; @include bp(640) { padding: 1% 0 1% 5%; } }
+	&.text_left { text-align: left; }
+	&.text_center { text-align: center; }
+	&.text_right { text-align: right; }
 }
-a {
-	&:hover, &:active {
-	}
+.left { float: left; }
+.right { float: right; }
+.image {
+	position: relative;
+	img { @include resp_image; }
+	.button {  position: absolute; bottom: 15px; left: 50%; margin: 0 0 0 -122px; }
 }
 .button {
 	text-align: center;
-	border-radius: 7px;
-	padding: 18px 50px;
+	color: $white;
+	font: 18px/18px 'museo_sans700', sans-serif;
+	padding: 15px 20px;
+	box-sizing: border-box;
+	background: $black;
 	text-transform: uppercase;
-	&:hover {
-	}
+	border: none;
+	@include inline_block;
+	@include vendorize( transition, all 0.17s ease-in-out);
 }
+/*
+.button {
+	text-align: center;
+	border-radius: 0;
+	border: 5px solid $white;
+	padding: 14px 25px;
+	color: $white;
+	background-color: $black;
+	background: rgba(0, 0, 0, 0.6);
+	text-transform: uppercase;
+	@include vendorize( transition, all .15s ease-in );
+	&:hover { color: $white; }
+}
+*/
+.gray_bg { background: #f5f5f5; }
+.dark_bg { background: $light_black; color: $white; }
+.icon { font-family: $fa; }
 .select_it {
 	width: 100%; float: left; position: relative;
 	.select_it_box {
-		width: 100%; float: left;
-		.displayed { cursor: pointer; text-align: left; display: block; background: $white; padding: 14px 15px; border-radius: 8px; width: 100%; color: $black; font: 18px/18px $text; text-transform: uppercase; }
+		width: 100%; float: left; outline: none;
+		&:focus { box-shadow: 0px 0px 5px $black; }
+		.displayed { cursor: pointer; text-align: left; display: block; background: $white; padding: 10px 30px; width: 100%; color: $black; font: normal 11px/20px $text; box-shadow: 0px 0px 5px $shadow; }
 		&.open .displayed { border-bottom-left-radius: 0px; border-bottom-right-radius: 0px; }
 		&.open .tab:after { content: "\f106";  }
 	}
 	.tab {
-		position: absolute; width: 24px; top: 16px; right: 5px; bottom: 10px; color: $black;
-		&:after { content: "\f107"; font: 32px/16px 'FontAwesome'; }
+		position: absolute; width: 5%; top: 0; right: 0; bottom: 0; color: $black; min-width: 26px;
+		&:after { content: "\f107"; font: 32px/40px 'FontAwesome'; position: absolute; top: 0; text-align: center; bottom: 0; right: 0; left: 0; }
 	}
-	ul { background: $white; width: 100%; position: absolute; top: 99%; z-index: 9999; float: left; padding: 10px 0; max-height: 150px; border-left: 1px solid $gray; border-right: 1px solid $gray; border-bottom: 1px solid $gray; box-sizing: border-box; overflow-y: scroll; }
-	li {
-		cursor: pointer; width: 100%; box-sizing: border-box; padding: 5px 7%; float: left; list-style: none outside; display: block; font: 12px/12px $text; color: $white;
+	ul { margin: 0; background: $white; width: 100%; position: absolute; top: 99%; z-index: 9999; float: left; padding: 10px 0; max-height: 150px; box-shadow: 0px 7px 15px -7px $shadow; box-sizing: border-box; overflow-y: scroll; overflow-x: hidden; }
+	ul li {
+		cursor: pointer; width: 100%; box-sizing: border-box; padding: 5px 7%; float: left; list-style: none outside; display: block; font: normal 11px/20px $text; color: $black; margin: 0;
 		&:hover, &.selected { color: $white; background: $light_black; }
 	}
 }
+.check_it {
+	background: $black; width: 20px; height: 20px; position: relative; float: left; margin: 0 10px 0 0;
+	&.checked {
+		.checked { display: block; }
+		.unchecked { display: none; }
+	}
+	.checked { position: absolute; top: 0; left: 0; right: 0; bottom: 0; display: none; text-align: center; &:after { content: '\f00c'; height: 100%; color: $white; width: 100%; font-size: 16px; line-height: 20px; text-align: center; } }
+	.unchecked { position: absolute; display: block; }
+}
+.radio_it {
+	background: $black; position: relative; float: left; margin: 0 10px 0 0; border-radius: 20px; padding: 10px; text-align: center;
+	&.checked {
+		.checked { display: block; }
+		.unchecked { display: none; }
+	}
+	.checked { position: absolute; top: 0; left: 0; right: 0; bottom: 0; display: none; text-align: center; &:after { content: '\f111'; color: $white; height: 100%; width: 100%; font-size: 12px; line-height: 21px; text-align: center; margin: 0 0 0 1px; } }
+	.unchecked { position: absolute; display: block; }
+}
+/*===========================================================================================
+	MEDIA CLASSES
+===========================================================================================*/
+.mobile { display: block !important; @include bp(480) { display: none !important; } }
+.tablet { display: none !important; @include bp(480) { display: block !important; } @include bp(768) { display: none !important; } }
+.desktop { display: none !important; @include bp(768) { display: block !important; } }
 /*===========================================================================================
 	CONTACT FORM
 ===========================================================================================*/
@@ -80,9 +138,9 @@ a {
 	float: left;
 	.container { max-width: 650px !important; }
 	label {
-		background: $white;
+		background: $black;
 		color: $white;
-		font: 12px/12px $arial;
+		font: 12px/12px $os;
 		right: 0;
 		bottom: 0;
 		padding: 5px 20px;
@@ -106,6 +164,7 @@ a {
 			margin: 0;
 			font: normal 11px/20px $text;
 			box-shadow: 0px 0px 5px $shadow;
+			@include placeholder { color: $black; }
 			&:focus { outline: none; box-shadow: 0px 0px 5px $light_black; }
 		}
 		textarea { resize: none; }
@@ -113,6 +172,8 @@ a {
 	}
 	.thirds { width: 100%; float: left; }
 	.thirds .block { width: 31%; margin: 0 1%; }
+	.left.half { padding: 0 1% 0 0; }
+	.right.half { padding: 0 0 0 1%; }
 }
 div.wpcf7-validation-errors { border: 2px solid #f7e700; width: 50%; float: left; margin: 0 25%; text-align: center; padding: 10px 0; min-width: 320px; }
 span.wpcf7-not-valid-tip { color: #f00; font-size: 1em; display: block; width: 100%; float: left; position: absolute; right: 0; text-align: right; padding: 5px 0 0; }

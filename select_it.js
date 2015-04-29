@@ -18,7 +18,15 @@
 			$(this).hide();
 			var choices = $(this).html();
 			if( $(this).attr('tabindex') ) { tabindex = $(this).attr('tabindex'); } else { tabindex = settings.tabindex; }
-			if( $(this).data('placeholder') ) { placeholder = $(this).data('placeholder'); } else { placeholder = settings.placeholder; }
+			if( $(this).data('placeholder') ) {
+				placeholder = $(this).data('placeholder');
+			} else {
+				if( $(this).parents('form').parents('div').hasClass('gform_wrapper') ) {
+					placeholder = $(this).find('option:first-child').text();
+				} else {
+					placeholder = settings.placeholder;
+				}
+			}
 			$(this).find('option').each(function() { option_count++; if( option_count != 1 && $(this).is(':selected') ) { placeholder = $(this).text(); } });
 			if( $(this).data('onchange') ) { onchange = $(this).data('onchange'); } else { onchange = settings.onchange; }
 			$(this).children('option').each(function(index) {
@@ -44,46 +52,95 @@
 			$('.select_it .select_it_box').keydown(function(e) {
 				e.stopImmediatePropagation();
 				current = $(this).parents('.select_it').attr('id');
+				var list_count = $('#'+current+' ul li').length;
+				console.log('code is:  '+e.keyCode+' items:  '+list_count);
+
+				// ARROW DOWN
 				if( e.keyCode == 40 ) {
-					$('#'+current+' .select_it_box').addClass('open');
-					//$('#'+current+' ul').show();
-					key_check = 0;
-					$('.select_it ul li').each(function() {
-						if( $(this).hasClass('selected') ) { key_check++; }
-					});
-					if( key_check === 0 ) {
-						$('#'+current+' ul li:first-child').addClass('selected');
-					} else {
+					if( $('#'+current+' ul li.selected').next('li').length ) {
 						$('#'+current+' ul li.selected').next().addClass('selected');
 						$('#'+current+' ul li.selected').first().removeClass('selected');
 						selected = $('#'+current+' ul li.selected').html();
 						$('#'+current+' .select_it_box .displayed').html(selected);
-					}
-				}
-				if( e.keyCode == 38 ) {
-					key_check = 0;
-					$('.select_it ul li').each(function() {
-						if( $(this).hasClass('selected') ) { key_check++; }
-					});
-					if( key_check === 0 ) {
-						$('#'+current+' ul li:first-child').addClass('selected');
 					} else {
+						$('#'+current+' ul li').removeClass('selected');
+						$('#'+current+' ul li:first-child').addClass('selected');
+						selected = $('#'+current+' ul li.selected').html();
+						$('#'+current+' .select_it_box .displayed').html(selected);
+					}
+					$(this).parents('#'+current).prev('select').find('option').each(function() {
+						select_check = $(this).val();
+						if( select_check == selected ) {
+							$(this).parents('select').find('option').removeAttr('selected');
+							$(this).attr('selected', 'selected');
+						}
+					});
+				}
+
+				// ARROW UP
+				if( e.keyCode == 38 ) {
+					if( $('#'+current+' ul li.selected').prev('li').length ) {
 						$('#'+current+' ul li.selected').prev().addClass('selected');
 						$('#'+current+' ul li.selected').last().removeClass('selected');
 						selected = $('#'+current+' ul li.selected').html();
 						$('#'+current+' .select_it_box .displayed').html(selected);
+					} else {
+						$('#'+current+' ul li').removeClass('selected');
+						$('#'+current+' ul li:last-child').addClass('selected');
+						selected = $('#'+current+' ul li.selected').html();
+						$('#'+current+' .select_it_box .displayed').html(selected);
 					}
+					$(this).parents('#'+current).prev('select').find('option').each(function() {
+						select_check = $(this).val();
+						if( select_check == selected ) {
+							$(this).parents('select').find('option').removeAttr('selected');
+							$(this).attr('selected', 'selected');
+						}
+					});
 				}
-				current = $(this).parents('.select_it').attr('id');
+
+				// ENTER
 				if( e.keyCode == 13 ) {
-					$('.select_it_box').removeClass('open');
-					$('.select_it ul').hide();
 					selected = $('#'+current+' ul li.selected').html();
 					$('#'+current+' .select_it_box .displayed').html(selected);
 				}
+
+				// TAB
 				if( e.keyCode == 9 ) {
-					$('#'+current).parents('.third').next().find('input, textarea').focus();
-					/*$('#'+current).parents('form > .third').next('.block').find('input, textarea').focus();*/
+					console.log(tabindex);
+					var next_tabindex = parseInt(tabindex)+1;
+					$("[TabIndex='"+next_tabindex+"']").focus();
+				}
+
+				// LETTERS & NUMBERS
+				if( e.keyCode >= 48 && e.keyCode <= 90 ) {
+					console.log( e.keyCode );
+					var character = String.fromCharCode(e.keyCode).toLowerCase();
+					$('#'+current+' ul li').each(function() {
+						var value = $(this).text().toLowerCase();
+						if( character == value.charAt(0) ) {
+							//console.log('found it!  character is:  '+character+' and first letter is:  '+value.charAt(0) );
+							selected = $(this).attr('rel');
+							selected_text = $(this).html();
+							$('#'+current+' ul li').removeClass('selected');
+							$('#'+current+' ul').hide();
+							$(this).addClass('selected');
+							/*
+							selected = $('#'+current+' ul li.selected').html();
+							$('#'+current+' .select_it_box .displayed').html(selected);
+							*/
+							$(this).parents('#'+current).prev('select').find('option').each(function() {
+								select_check = $(this).val();
+								if( select_check == selected ) {
+									$(this).parents('select').find('option').removeAttr('selected');
+									$(this).attr('selected', 'selected');
+								}
+							});
+						}
+					});
+					$('#'+current).children('.select_it_box').removeClass('open');
+					$('#'+current+' .select_it_box .displayed').html(selected);
+					$('#'+current+' .select_it_box .displayed').html(selected_text);
 				}
 				return false;
 			});
@@ -119,6 +176,7 @@
 						data: { action: 'gallery_loader', id: value },
 						error: function(data) { console.log('fail'); },
 						success: function(data) {
+							console.log('is ' . data);
 							$(settings.onchange_container).html(data);
 							if( $('.gallery' ).hasClass('photos_videos') ) {
 								$(settings.onchange_container).data('owlCarousel').reinit({
