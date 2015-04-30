@@ -107,10 +107,13 @@
 
 				// TAB
 				if( e.keyCode == 9 ) {
-					console.log(tabindex);
 					var next_tabindex = parseInt(tabindex)+1;
 					$("[TabIndex='"+next_tabindex+"']").focus();
 				}
+				if( e.shiftKey  && e.keyCode == 9 ) {
+					var prev_tabindex = parseInt(tabindex)-1;
+					$("[TabIndex='"+prev_tabindex+"']").focus();
+				}				
 
 				// LETTERS & NUMBERS
 				if( e.keyCode >= 48 && e.keyCode <= 90 ) {
