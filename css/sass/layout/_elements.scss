@@ -61,46 +61,35 @@ body { font-size: 16px; line-height: 1em; font-family: $text; color: $white; bac
 .button {
 	text-align: center;
 	color: $white;
-	font: 18px/18px 'museo_sans700', sans-serif;
-	padding: 15px 20px;
-	box-sizing: border-box;
+	border-radius: 4px;
+	font: 1.2em/1.2em $osb;
+	padding: 1em 2em;
 	background: $black;
 	text-transform: uppercase;
 	border: none;
+	@include box-sizing( $box-model: border-box );
 	@include inline_block;
 	@include vendorize( transition, all 0.17s ease-in-out);
+	&:hover { background: $light_black; };
 }
-/*
-.button {
-	text-align: center;
-	border-radius: 0;
-	border: 5px solid $white;
-	padding: 14px 25px;
-	color: $white;
-	background-color: $black;
-	background: rgba(0, 0, 0, 0.6);
-	text-transform: uppercase;
-	@include vendorize( transition, all .15s ease-in );
-	&:hover { color: $white; }
-}
-*/
 .gray_bg { background: #f5f5f5; }
 .dark_bg { background: $light_black; color: $white; }
 .icon { font-family: $fa; }
 .select_it {
-	width: 100%; float: left; position: relative;
-	.select_it_box {
-		width: 100%; float: left; outline: none;
-		&:focus { box-shadow: 0px 0px 5px $black; }
-		.displayed { cursor: pointer; text-align: left; display: block; background: $white; padding: 10px 30px; width: 100%; color: $black; font: normal 11px/20px $text; box-shadow: 0px 0px 5px $shadow; }
-		&.open .displayed { border-bottom-left-radius: 0px; border-bottom-right-radius: 0px; }
-		&.open .tab:after { content: "\f106";  }
+	position: relative; width: 100%; float: left;
+	.display {
+		width: 100%; float: left; position: relative; z-index: 99999; outline: none; display: block; background: $white; padding: 10px 30px; box-shadow: inset 1px 1px 2px $shadow; border-radius: 4px; border: 1px solid #CCCCCC; @include vendorize( transition, all .15s ease );
+		//&:focus { box-shadow: inset 0px 0px 5px $black; }
+		.current_item { display: block; cursor: pointer; text-align: left; color: $black; font: normal 11px/20px $text; text-overflow: ellipsis; white-space: nowrap; overflow: hidden; }
+		&.open { border-radius: 4px 4px 0 0; box-shadow: inset 0px 0px 10px #c9c9c9; }
+		&.open .current_item { border-bottom-left-radius: 0px; border-bottom-right-radius: 0px; }
+		&.open .tab:after { content: "\f0d8";  }
 	}
 	.tab {
-		position: absolute; width: 5%; top: 0; right: 0; bottom: 0; color: $black; min-width: 26px;
-		&:after { content: "\f107"; font: 32px/40px 'FontAwesome'; position: absolute; top: 0; text-align: center; bottom: 0; right: 0; left: 0; }
+		position: absolute; width: 5%; top: 0; right: 0; bottom: 0; color: #c9c9c9; min-width: 26px;
+		&:after { content: "\f0d7"; position: absolute; top: 0; text-align: center; bottom: 0; right: 0; left: 0; font: 1.2em/2.2em $fa; @include vendorize(transition, all .1s ease ); }
 	}
-	ul { margin: 0; background: $white; width: 100%; position: absolute; top: 99%; z-index: 9999; float: left; padding: 10px 0; max-height: 150px; box-shadow: 0px 7px 15px -7px $shadow; box-sizing: border-box; overflow-y: scroll; overflow-x: hidden; }
+	ul { margin: 0; background: $white; width: 100%; position: absolute; top: 99%; z-index: 99998; float: left; padding: 10px 0; max-height: 150px; box-shadow: 0px 7px 15px -7px $shadow; border-left: 1px solid #CCCCCC; border-right: 1px solid #CCCCCC;  border-bottom: 1px solid #CCCCCC;  @include box-sizing( $box-model: border-box ); overflow-y: scroll; overflow-x: hidden; }
 	ul li {
 		cursor: pointer; width: 100%; box-sizing: border-box; padding: 5px 7%; float: left; list-style: none outside; display: block; font: normal 11px/20px $text; color: $black; margin: 0;
 		&:hover, &.selected { color: $white; background: $light_black; }
@@ -162,10 +151,13 @@ body { font-size: 16px; line-height: 1em; font-family: $text; color: $white; bac
 			padding: 10px 30px;
 			vertical-align: middle;
 			margin: 0;
+			color: $light_black;
 			font: normal 11px/20px $text;
-			box-shadow: 0px 0px 5px $shadow;
-			@include placeholder { color: $black; }
-			&:focus { outline: none; box-shadow: 0px 0px 5px $light_black; }
+			box-shadow: inset 1px 1px 2px $shadow;
+			border-radius: 4px;
+			border: 1px solid #CCCCCC;
+			@include placeholder { color: $light_black; }
+			&:focus { outline: none; box-shadow: inset 0px 0px 5px $light_black; border: 1px solid $light_black; }
 		}
 		textarea { resize: none; }
 		&.omit label { position: relative; top: auto; left: auto; height: auto; }
