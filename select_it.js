@@ -32,7 +32,12 @@
 			$(this).children('option').each(function(index) {
 				var choice_value = $(this).val();
 				var choice_text = $(this).text();
-				choices_array[index] = ['<li rel="'+choice_value+'">'+choice_text+'</li>'];
+				if( $(this).attr('selected') ) {
+					placeholder = choice_text;
+					choices_array[index] = ['<li rel="'+choice_value+'">'+choice_text+'</li>'];
+				} else {
+					choices_array[index] = ['<li rel="'+choice_value+'">'+choice_text+'</li>'];
+				}
 			});
 			choices_array = choices_array.join('\r');
 			$(this).after('<div id="select_'+count+'" class="select_it"><div class="display" tabindex="'+tabindex+'"><span class="current_item">'+placeholder+'</span><span class="tab"></span></div><ul style="display: none;">'+choices_array+'</ul></div><!--/select_it-->');
